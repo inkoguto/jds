@@ -1,35 +1,34 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class SingleLinked {
     public static void main(String []args) {
         SingleLinkedList slinkedl = new SingleLinkedList();
-
-        slinkedl.addAtEnd(new Node(0));
-        slinkedl.addAtEnd(new Node(1));
-        slinkedl.addAtEnd(new Node(2));
-        slinkedl.addAtEnd(new Node(3));
-        slinkedl.addAtEnd(new Node(6));
-        slinkedl.addAtBegin(new Node(54));
-        System.out.println("original linked list");
-        slinkedl.display();
-        
-        System.out.println("After delete 1");
-        slinkedl.delete(1);
-        slinkedl.display();
-
-        System.out.println("after insert 66 after 2");
-        slinkedl.add(2, new Node(66));
-        slinkedl.display();
-
-        System.out.println("after reverse");
-        slinkedl.reverse();
-        slinkedl.display();
-
-        System.out.println("after sort");
+        ListHandler handler = new ListHandler();
+        slinkedl = handler.populate(slinkedl);
+        handler.print(slinkedl, "original list");
         slinkedl.sort();
-        slinkedl.display();
+        handler.print(slinkedl, "sorted list");
     }
+}
+
+class ListHandler {
+    public SingleLinkedList populate(SingleLinkedList list) {
+        Random random = new Random();
+        int range = 100000;
+        for (int i = 0; i <= range; i++) {
+            list.addAtEnd(new Node(random.nextInt((range - 0) + 1)));
+        }
+
+        return list;
+    }
+
+    public void print(SingleLinkedList list, String message) {
+        System.out.println(message);
+        list.display();
+    }
+
 }
 
 class Node {
