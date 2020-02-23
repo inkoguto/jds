@@ -9,6 +9,8 @@ public class SingleLinked {
         slinkedl.addAtEnd(new Node(1));
         slinkedl.addAtEnd(new Node(2));
         slinkedl.addAtEnd(new Node(3));
+        slinkedl.addAtEnd(new Node(6));
+        slinkedl.addAtBegin(new Node(54));
         System.out.println("original linked list");
         slinkedl.display();
         
@@ -18,6 +20,14 @@ public class SingleLinked {
 
         System.out.println("after insert 66 after 2");
         slinkedl.add(2, new Node(66));
+        slinkedl.display();
+
+        System.out.println("after reverse");
+        slinkedl.reverse();
+        slinkedl.display();
+
+        System.out.println("after sort");
+        slinkedl.sort();
         slinkedl.display();
     }
 }
@@ -39,6 +49,10 @@ class Node {
 
     public Integer getValue() {
         return this.value;
+    }
+
+    public void setValue(Integer value) {
+        this.value = value;
     }
 }
 
@@ -102,18 +116,69 @@ class SingleLinkedList {
 
     public void delete(Integer key) {
         Node current = this.head;
-        if (current.getValue() instanceof Integer && current.getValue() == key) {
+        if (current.getValue() == key) {
             this.head = current.getNext();
 
             return;
         }
         while (current != null) {
             Node next = current.getNext();
-            if (next.getValue() instanceof Integer && next.getValue() == key) {
+            if (next.getValue() == key) {
                 current.setNext(next.getNext());
                 next = null;
                 break;
             }
+            current = current.getNext();
         }
     }
+
+    public void reverse() {
+        Node prev = null;
+        Node current = this.head;
+        Node next = null;
+
+        while (current != null) {
+            next = current.getNext();
+            current.setNext(prev);
+            prev = current;
+            current = next;
+        }
+
+        this.head = prev;
+    }
+
+    public Integer size() {
+        Integer size = 0;
+        Node current = this.head;
+
+        while (current != null) {
+            size += 1;
+            current = current.getNext();
+        }
+
+        return size;
+    }
+
+    public void sort() {
+        Node current = this.head;
+        Node next = null;
+        Integer size = this.size();
+        Integer tmpValue = null;
+        int i, j, k;
+        k = size;
+        for (i = 0; i < size - 1; i++, k--) {
+            current = this.head;
+            next = current.getNext();
+            for (j = 1; j < k; j++) {
+                if (current.getValue() > next.getValue()) {
+                    tmpValue = current.getValue();
+                    current.setValue(next.getValue());
+                    next.setValue(tmpValue);
+                }
+                current = current.getNext();
+                next = current.getNext();
+            }
+        }
+    }
+
 }
