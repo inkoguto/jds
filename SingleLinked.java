@@ -1,5 +1,42 @@
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
+
+public class SingleLinked {
+    public static void main(String []args) {
+        SingleLinkedList slinkedl = new SingleLinkedList();
+
+        slinkedl.addAtEnd(new Node(0));
+        slinkedl.addAtEnd(new Node(1));
+        slinkedl.addAtEnd(new Node(2));
+        slinkedl.addAtEnd(new Node(3));
+        System.out.println("original linked list");
+        slinkedl.display();
+        
+        System.out.println("After delete 1");
+        slinkedl.delete(1);
+        slinkedl.display();
+    }
+}
+
+class Node {
+    private Integer value;
+    private Node next;
+
+    public Node(Integer value) {
+        this.value = value;
+    }
+
+    public void setNext(Node node) {
+        this.next = node;
+    }
+    public Node getNext() {
+        return this.next;
+    }
+
+    public Integer getValue() {
+        return this.value;
+    }
+}
 
 class SingleLinkedList {
     private Node head;
@@ -62,5 +99,4 @@ class SingleLinkedList {
         
     }
 
- 
 }
