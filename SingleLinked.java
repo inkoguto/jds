@@ -15,6 +15,10 @@ public class SingleLinked {
         System.out.println("After delete 1");
         slinkedl.delete(1);
         slinkedl.display();
+
+        System.out.println("after insert 66 after 2");
+        slinkedl.add(2, new Node(66));
+        slinkedl.display();
     }
 }
 
@@ -64,6 +68,24 @@ class SingleLinkedList {
         current.setNext(node);
     }
 
+    public void addAtBegin(Node node) {
+        node.setNext(this.head);
+        this.head = node;
+    }
+
+    public void add(Integer key, Node node) {
+        Node current = this.head;
+
+        while (current != null) {
+            if (current.getValue() == key) {
+                node.setNext(current.getNext());
+                current.setNext(node);
+                break;
+            }
+            current = current.getNext();
+        }
+    }
+
     public List<Node> traverse() {
         List<Node> list = new ArrayList<Node>();
         Node current = this.head;
@@ -94,9 +116,4 @@ class SingleLinkedList {
             }
         }
     }
-
-    public void delete(String key) {
-        
-    }
-
 }
